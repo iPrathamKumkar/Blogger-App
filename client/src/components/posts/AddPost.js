@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
@@ -16,7 +16,8 @@ class AddPost extends Component {
             image: "",
             uploadImageURL: "",
             title: "",
-            text: ""
+            text: "",
+            uploaded:false
         };
         this.getPicture = this.getPicture.bind(this);
         this.onFileSubmit = this.onFileSubmit.bind(this);
@@ -24,17 +25,9 @@ class AddPost extends Component {
     }
     componentDidMount() {
         // If logged in and user navigates to Register page, should redirect them to dashboard
-        if (!this.props.auth.isAuthenticated) {
-            this.props.history.push("/login");
-        }
+
     }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
-        }
-    }
+
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
@@ -68,27 +61,33 @@ class AddPost extends Component {
             });
     };
     onFileSubmit = e => {
+        
+        
         e.preventDefault();
-        console.log(this.state.image)
         const data = new FormData()
-        data.append('file', this.state.image)
+        data.append('images', this.state.image)
+
         axios.post(`http://localhost:5000/api/posts/add-image`, data)
             .then(response => {
-                console.log(response);
-                if (response.status == 200) {
-                    this.setState({
-                        uploadImageURL: response.data.data
-                    })
-                }
+                this.setState({
+                    uploadImageURL: response.data.Location
+                })
+                alert("Image Uploaded")
             }
             ).catch(ex => {
                 alert(ex);
             });
     };
+
+  
     render() {
-        const { errors } = this.state;
+        let redirectVar=null;
+        if(this.state.uploaded){
+            redirectVar= <Redirect to= "/dashboard" />
+        }
         return (
             <div className="container">
+                {redirectVar}
                 <div className="row">
                     <div className="col s8 offset-s2">
                         <Link to="/" className="btn-flat waves-effect">
@@ -117,6 +116,7 @@ class AddPost extends Component {
                                             letterSpacing: "1.5px",
                                             marginTop: "1rem"
                                         }}
+                                        type="submit"
                                         className="btn btn-small waves-effect waves-light hoverable blue accent-3"
                                         onClick={this.onFileSubmit}
                                     >
@@ -161,15 +161,4 @@ class AddPost extends Component {
         );
     }
 }
-AddPost.propTypes = {
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
-};
-const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
-});
-export default connect(
-    mapStateToProps,
-    {}
-)(withRouter(AddPost));
+export default AddPost;
