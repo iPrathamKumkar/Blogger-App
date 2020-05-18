@@ -19,9 +19,6 @@ class Landing extends Component {
                             <b>Personalize</b> your own{" "}
                             <span style={{ fontFamily: "monospace" }}>HANDCRAFTED</span> web page
             </h4>
-                        <p className="flow-text grey-text text-darken-1">
-                            Start today, it's free!
-            </p>
                         <br />
                         <div className="col s6">
                             <Link

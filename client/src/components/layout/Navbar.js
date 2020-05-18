@@ -41,7 +41,7 @@ class Navbar extends Component {
                                         className="btn btn-flat blue accent-3"
                                     >
                                         <b>Logout</b>
-            </button>
+                                    </button>
                                 </li>
                             </ul>
                         )}

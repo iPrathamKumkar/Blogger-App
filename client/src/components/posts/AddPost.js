@@ -89,9 +89,9 @@ class AddPost extends Component {
                         </div>
                         <div>
                             <div className="file-field input-field">
-                                <div className="btn btn-small blue accent-3" style={ { marginLeft:"1rem" }}>
+                                <div className="btn btn-small blue accent-3" style={{ marginLeft: "1rem" }}>
                                     Choose file
-                                    <input type="file" onChange={this.getPicture} />
+                                    <input type="file" accept=".jpg, .jpeg" onChange={this.getPicture} />
                                 </div>
                                 <div className="file-path-wrapper">
                                     <input className="file-path validate" type="text" />

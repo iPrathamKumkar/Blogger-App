@@ -19,7 +19,7 @@ router.post("/create", async (req, res) => {
 
     await newPost.save((err, result) => {
         if (err) {
-            return res.status(400).json(err);
+            return res.status(400).json("err");
         } else {
             return res.status(200).json("Created");
         }
