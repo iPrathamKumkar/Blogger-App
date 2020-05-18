@@ -10,14 +10,10 @@ class AddPost extends Component {
             uploadImageURL: "",
             title: "",
             text: "",
-            uploaded:false
+            uploaded: false
         };
         this.getPicture = this.getPicture.bind(this);
         this.onFileSubmit = this.onFileSubmit.bind(this);
-
-    }
-    componentDidMount() {
-        // If logged in and user navigates to Register page, should redirect them to dashboard
 
     }
 
@@ -53,8 +49,8 @@ class AddPost extends Component {
             });
     };
     onFileSubmit = e => {
-        
-        
+
+
         e.preventDefault();
         const data = new FormData()
         data.append('images', this.state.image)
@@ -71,11 +67,11 @@ class AddPost extends Component {
             });
     };
 
-  
+
     render() {
-        let redirectVar=null;
-        if(this.state.uploaded){
-            redirectVar= <Redirect to= "/dashboard" />
+        let redirectVar = null;
+        if (this.state.uploaded) {
+            redirectVar = <Redirect to="/dashboard" />
         }
         return (
             <div className="container">
@@ -93,8 +89,8 @@ class AddPost extends Component {
                         </div>
                         <div>
                             <div className="file-field input-field">
-                                <div className="btn btn-small waves-effect waves-light hoverable blue accent-3s">
-                                    <span>Choose file</span>
+                                <div className="btn btn-small blue accent-3" style={ { marginLeft:"1rem" }}>
+                                    Choose file
                                     <input type="file" onChange={this.getPicture} />
                                 </div>
                                 <div className="file-path-wrapper">
@@ -102,14 +98,8 @@ class AddPost extends Component {
                                 </div>
                                 <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                                     <button
-                                        style={{
-                                            width: "150px",
-                                            borderRadius: "3px",
-                                            letterSpacing: "1.5px",
-                                            marginTop: "1rem"
-                                        }}
                                         type="submit"
-                                        className="btn btn-small waves-effect waves-light hoverable blue accent-3"
+                                        className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                                         onClick={this.onFileSubmit}
                                     >
                                         Upload file
@@ -125,7 +115,6 @@ class AddPost extends Component {
                                     type="text"
                                 />
                                 <label htmlFor="title">Title</label>
-                                {/* <span className="red-text">{errors.email}</span> */}
                             </div>
                             <div className="input-field col s12">
                                 <textarea id="text" className="materialize-textarea" onChange={this.onChange}
@@ -143,8 +132,8 @@ class AddPost extends Component {
                                     onClick={this.onSubmit}
                                     className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                                 >
-                                    Submit
-                </button>
+                                    Add post
+                                </button>
                             </div>
                         </div>
                     </div>
