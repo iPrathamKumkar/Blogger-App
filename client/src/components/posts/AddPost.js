@@ -1,18 +1,11 @@
 import React, { Component } from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import classnames from "classnames";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+
 class AddPost extends Component {
     constructor() {
         super();
         this.state = {
-            name: "",
-            email: "",
-            password: "",
-            password2: "",
-            errors: {},
             image: "",
             uploadImageURL: "",
             title: "",
@@ -49,7 +42,6 @@ class AddPost extends Component {
 
         axios.post(`http://localhost:5000/api/posts/create`, data)
             .then(response => {
-                console.log(response);
                 if (response.status == 200) {
                     this.setState({
                         uploaded: true
